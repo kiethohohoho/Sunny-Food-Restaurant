@@ -2,16 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Đăng Nhập</title>
+    <title>Admin ● Đăng Nhập</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="Public/reset.css">
     <link rel="stylesheet" href="Public/css/SignInUp.css">
-
 </head>
 
 <body>
@@ -21,30 +19,21 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap py-5">
                         <div class="img d-flex align-items-center justify-content-center">Sunny Food</div>
-                        <h3 class="text-center mb-0">Đăng Nhập</h3>
+                        <h3 class="text-center mb-0">Admin</h3>
                         <form id="login-form" action="index.php?controller=signin&action=handle" class="login-form" method="POST">
                             <div class="form-group">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-envelope"></span></div>
-                                <input autocomplete="off" type="text" name="email" class="form-control" style="width: 280px;" placeholder="Email" required>
+                                <input autocomplete="off" type="text" name="email" class="form-control" style="width: 280px;" placeholder="Tài khoản" required>
                             </div>
                             <div class="form-group">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
                                 <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
-                            </div>
-                            <div class="form-group d-md-flex">
-                                <div class="w-100 text-md-right">
-                                    <a href="#">Quên mật khẩu</a>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn form-control btn-primary rounded submit px-3" name="signinsubmit"> Đăng Nhập
                                 </button>
                             </div>
                         </form>
-                        <div class="w-100 text-center mt-4 text">
-                            <p class="mb-0">Chưa có tài khoản?</p>
-                            <a href="index.php?controller=signup">Đăng Ký</a>
-                        </div>
                     </div>
                 </div>
             </div>

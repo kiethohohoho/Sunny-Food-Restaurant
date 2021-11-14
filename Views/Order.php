@@ -59,7 +59,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <!-- thanh navbar khi mobi -->
-            <a class="navbar-brand" href="index.html">Sunny Food</a>
+            <a class="navbar-brand" href="index.php">Sunny Food</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -70,15 +70,15 @@
                     <li class="nav-item"><a href="index.php?controller=menu" class="nav-link">Menu</a></li>
                     <li class="nav-item active"><a href="index.php?controller=order" class="nav-link">Giỏ hàng</a></li>
                     <?php
-                    if (!isset($_COOKIE['sf-useronlinename'])) {
+                    if (!isset($_COOKIE['sf-useronlineid'])) {
                         echo '<li class="nav-item cta"><a href="index.php?controller=signin" class="nav-link" style="margin-right: 10px;"> Đăng Nhập </a></li>
                                 <li class="nav-item cta"><a href="index.php?controller=signup" class="nav-link"> Đăng Ký </a></li>';
                     }
                     ?>
                     <?php
-                    if (isset($_COOKIE['sf-useronlinename'])) {
+                    if (isset($_COOKIE['sf-useronlineid'])) {
                         echo '<li class="nav-item d-flex">
-                                    <div class="avatar-proflie-cover-div ">
+                                    <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
                                             <span class="fas fa-user-alt"></span>
                                             <span>';
@@ -86,7 +86,8 @@
                         echo '</span>
                                         </a>
                                     </div>
-                                </li>';
+                                </li>
+                                <li class="nav-item cta"><a href="index.php" class="nav-link signout"> Đăng Xuất </a></li>';
                     }
                     ?>
                 </ul>
@@ -103,10 +104,10 @@
         <div class="container">
             <ul class="oder-link">
                 <li class="logo">
-                    <a href="./homePage.html">Sunny Food</a>
+                    <a href="index.php">Sunny Food</a>
                 </li>
                 <li class="oder-link-item ">
-                    <a href="#">/ Gio Hang</a>
+                    <a href="">/ Gio Hang</a>
                 </li>
             </ul>
             <h2 class="font-bold"></h2>
@@ -252,13 +253,53 @@
     </script>
     <script>
         $(document).ready(function() {
+            $(document).ready(function() {
+                $(".signout").click(function() {
+                    document.cookie = "sf-useronlineid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "sf-useronlinename=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "sf-useronlinephone=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    window.location.href = "index.php";
+                });
+            });
+
+            function formatMoney(params) {
+                return Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(params);
+            }
+
+            let phiship = 30000;
+            let voucher = 0;
+            let tamtinh = 0;
+            let thanhtien = 0;
+
+            function UpdateColRight() {
+                let array_all_price = document.getElementsByClassName("price");
+                let array_all_count = document.getElementsByClassName("sl");
+
+                for (let i = 0; i < array_all_price.length; i++) {
+                    let a = array_all_price[i].textContent.slice(0, -2).replaceAll('.', '');
+                    let b = array_all_count[i].textContent.slice(10);
+                    tamtinh += a * b;
+                }
+                thanhtien = tamtinh + phiship - voucher * tamtinh / 100;
+
+                document.getElementById('tam-tinh').innerHTML = formatMoney(tamtinh);
+                document.getElementById('phi-ship').innerHTML = formatMoney(phiship);
+                document.getElementById('thanh-tien').innerHTML = formatMoney(thanhtien);
+            }
+            UpdateColRight();
             //xử lý sự kiện click tăng giảm xóa món ăn trong giỏ hàng
             $(".gh-giam").click(function(e) {
                 let selector = `#sl-${e.target.id}`;
                 let soluong_fe = document.querySelector(selector).textContent.slice(10) * 1 - 1;
                 if (soluong_fe) {
                     document.querySelector(selector).innerHTML = `Số lượng: ${soluong_fe}`;
+                    UpdateColRight();
                 } else {
+                    document.querySelector(selector).innerHTML = `Số lượng: ${soluong_fe}`;
+                    UpdateColRight();
                     $(`.list-cart:has(${selector})`).addClass("hidden");
                     let new_sl = document.querySelector(".font-bold").textContent.slice(11, -4) * 1 - 1;
                     document.querySelector(".font-bold").innerHTML = `Giỏ hàng ● ${new_sl} món`;
@@ -290,6 +331,7 @@
                 let selector = `#sl-${e.target.id}`;
                 let soluong_fe = document.querySelector(selector).textContent.slice(10) * 1 + 1;
                 document.querySelector(selector).innerHTML = `Số lượng: ${soluong_fe}`;
+                UpdateColRight();
 
                 let giohang = JSON.parse(localStorage.getItem("sf-giohang"));
                 let soluong = 0;
@@ -311,40 +353,18 @@
             });
             $(".gh-xoa-monan").click(function(e) {
                 let selector = `#sl-${e.target.id}`;
+                let soluong_fe = document.querySelector(selector).textContent.slice(10) * 1 - 1;
+                soluong_fe = 0;
+                document.querySelector(selector).innerHTML = `Số lượng: ${soluong_fe}`;
+                UpdateColRight();
                 $(`.list-cart:has(${selector})`).addClass("hidden");
                 let new_sl = document.querySelector(".font-bold").textContent.slice(11, -4) * 1 - 1;
                 document.querySelector(".font-bold").innerHTML = `Giỏ hàng ● ${new_sl} món`;
-
                 let giohang = JSON.parse(localStorage.getItem("sf-giohang"));
                 giohang = giohang.filter(val => val.id != e.target.id);
 
                 localStorage.setItem("sf-giohang", JSON.stringify(giohang));
             });
-
-            //Xử lý thanh toán giỏ hàng
-            let array_all_price = document.getElementsByClassName("price");
-            let array_all_count = document.getElementsByClassName("sl");
-
-            let phiship = 30000;
-            let voucher = 0;
-            let tamtinh = 0;
-            for (let i = 0; i < array_all_price.length; i++) {
-                let a = array_all_price[i].textContent.slice(0, -2).replaceAll('.', '');
-                let b = array_all_count[i].textContent.slice(10);
-                tamtinh += a * b;
-            }
-            let thanhtien = tamtinh + phiship - voucher * tamtinh / 100;
-
-            function formatMoney(params) {
-                return Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).format(params);
-            }
-
-            document.getElementById('tam-tinh').innerHTML = formatMoney(tamtinh);
-            document.getElementById('phi-ship').innerHTML = formatMoney(phiship);
-            document.getElementById('thanh-tien').innerHTML = formatMoney(thanhtien);
 
             function setCookie(cname, cvalue, exdays) {
                 const d = new Date();

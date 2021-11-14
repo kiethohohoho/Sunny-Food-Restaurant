@@ -10,6 +10,10 @@ class AdminController extends BaseController
     }
     public function index()
     {
+        // if (!isset($_COOKIE['sf-admin'])) {
+        //     header("location: index.php?controller=admin&action=signinad");
+        //     return;
+        // }
         $dbResult = $this->adminDtb->selectAllCustomer();
         if ($dbResult->num_rows) {
             while ($row = $dbResult->fetch_array()) {
@@ -18,8 +22,12 @@ class AdminController extends BaseController
                 $email[] = $row['email'];
                 $sdt[] = $row['sdt'];
             }
+            $this->view('Views/Admin/Khachhang.php', ['id_khach_hang' => $id_khach_hang, 'ho_ten' => $ho_ten, 'email' => $email, 'sdt' => $sdt]);
         }
-        $this->view('Views/Admin/Khachhang.php', ['id_khach_hang' => $id_khach_hang, 'ho_ten' => $ho_ten, 'email' => $email, 'sdt' => $sdt]);
+    }
+    public function signinad()
+    {
+        $this->view('Views/Admin/Signinad.php');
     }
     public function Monan()
     {
@@ -35,8 +43,8 @@ class AdminController extends BaseController
                 $noi_bat[] = $abc['noi_bat'];
                 $con_hang[] = $abc['con_hang'];
             }
+            $this->view('Views/Admin/Monan.php', ['id_mon_an' => $id_mon_an, 'mon_an' => $mon_an, 'mo_ta' => $mo_ta, 'gia' => $gia, 'link_anh' => $link_anh, 'ten_loai' => $ten_loai, 'noi_bat' => $noi_bat, 'con_hang' => $con_hang]);
         }
-        $this->view('Views/Admin/Monan.php', ['id_mon_an' => $id_mon_an, 'mon_an' => $mon_an, 'mo_ta' => $mo_ta, 'gia' => $gia, 'link_anh' => $link_anh, 'ten_loai' => $ten_loai, 'noi_bat' => $noi_bat, 'con_hang' => $con_hang]);
     }
     public function Donhang()
     {
@@ -50,8 +58,10 @@ class AdminController extends BaseController
                 $ten_nguoi_nhan[] = $row['ten_nguoi_nhan'];
                 $sdt_nguoi_nhan[] = $row['sdt_nguoi_nhan'];
             }
+            $this->view('Views/Admin/Donhang.php', ['id_don_hang' => $id_don_hang, 'id_khach_hang' => $id_khach_hang, 'ngay_dat_hang' => $ngay_dat_hang, 'dia_chi_nhan_hang' => $dia_chi_nhan_hang, 'ten_nguoi_nhan' => $ten_nguoi_nhan, 'sdt_nguoi_nhan' => $sdt_nguoi_nhan]);
         }
-        $this->view('Views/Admin/Donhang.php', ['id_don_hang' => $id_don_hang, 'id_khach_hang' => $id_khach_hang, 'ngay_dat_hang' => $ngay_dat_hang, 'dia_chi_nhan_hang' => $dia_chi_nhan_hang, 'ten_nguoi_nhan' => $ten_nguoi_nhan, 'sdt_nguoi_nhan' => $sdt_nguoi_nhan]);
+        $this->view('Views/Admin/Donhang.php');
+
     }
     public function detail($id)
     {
@@ -64,7 +74,7 @@ class AdminController extends BaseController
                 $giatien[] = $row['giatien'];
                 $tongtien[] = $row['so_luong']*$row['giatien'].".000 ₫";
             }
+            $this->view('Views/Admin/Chitietonhang.php', ['id' => $id,'id_mon_an' => $id_mon_an,'so_luong' => $so_luong,'giatien' => $giatien,'tongtien' => $tongtien]);
         }
-        $this->view('Views/Admin/Chitietonhang.php', ['id' => $id,'id_mon_an' => $id_mon_an,'so_luong' => $so_luong,'giatien' => $giatien,'tongtien' => $tongtien]);
     }
 }

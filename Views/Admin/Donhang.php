@@ -86,17 +86,17 @@
                                             </thead>
 
                                             <tbody>
-                                                <?php foreach ($id_don_hang as $key => $value) : ?>
+                                                <?php if(isset($id_don_hang)){foreach ($id_don_hang as $key => $value) : ?>
                                                     <tr class="pointer">
-                                                        <td><?php echo $id_don_hang[$key]; ?></td>
-                                                        <td><?php echo $id_khach_hang[$key]; ?></td>
-                                                        <td><?php echo $ngay_dat_hang[$key]; ?></td>
-                                                        <td><?php echo $dia_chi_nhan_hang[$key]; ?></td>
-                                                        <td><?php echo $ten_nguoi_nhan[$key]; ?></td>
-                                                        <td><?php echo $sdt_nguoi_nhan[$key]; ?></td>
+                                                        <td><?php if(isset($id_don_hang[$key])){echo $id_don_hang[$key];} ?></td>
+                                                        <td><?php if(isset($id_khach_hang[$key])){echo $id_khach_hang[$key];} ?></td>
+                                                        <td><?php if(isset($ngay_dat_hang[$key])){echo $ngay_dat_hang[$key];} ?></td>
+                                                        <td><?php if(isset($dia_chi_nhan_hang[$key])){echo $dia_chi_nhan_hang[$key];} ?></td>
+                                                        <td><?php if(isset($ten_nguoi_nhan[$key])){echo $ten_nguoi_nhan[$key];} ?></td>
+                                                        <td><?php if(isset($sdt_nguoi_nhan[$key])){echo $sdt_nguoi_nhan[$key];} ?></td>
                                                         <td><a target="_blank" href="index.php?controller=admin&action=detail&param=<?php echo $id_don_hang[$key]?>">Xem</a></td>
                                                     </tr>
-                                                <?php endforeach; ?>
+                                                <?php endforeach; } else {echo "<tr><td style='text-align: center; color: red;' colspan='7'>Danh Sách Rỗng</td></tr>";}?>
                                             </tbody>
                                         </table>
                                     </div>

@@ -84,10 +84,10 @@
                                             <tbody>
                                                 <?php foreach ($id_khach_hang as $key => $value) : ?>
                                                     <tr class="pointer">
-                                                        <td><?php echo $id_khach_hang[$key];?></td>
-                                                        <td><?php echo $ho_ten[$key];?></td>
-                                                        <td><?php echo $email[$key];?></td>
-                                                        <td><?php echo $sdt[$key];?></td>
+                                                        <td><?php if($id_khach_hang[$key]){echo $id_khach_hang[$key];} ?></td>
+                                                        <td><?php if($ho_ten[$key]){echo $ho_ten[$key];}?></td>
+                                                        <td><?php if($email[$key]){echo $email[$key];}?></td>
+                                                        <td><?php if($sdt[$key]){echo $sdt[$key];}?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

@@ -28,13 +28,11 @@ class SignupController extends BaseController
             $em = $_POST['email'];
             $pa = $_POST['password'];
             $ph = $_POST['phonenumber'];
-            $ad = $_POST['address'];
             $id = substr($em, 0, strrpos($em, '@'));
             setcookie("fu", $fu, time() + (300), "/");
             setcookie("em", $em, time() + (300), "/");
             setcookie("pa", $pa, time() + (300), "/");
             setcookie("ph", $ph, time() + (300), "/");
-            setcookie("ad", $ad, time() + (300), "/");
             setcookie("id", $id, time() + (300), "/");
 
             //gửi email
@@ -65,8 +63,13 @@ class SignupController extends BaseController
         }
         if (isset($_POST['OTP-submit'])) {
             if ($_POST['OTP'] === $_COOKIE['maxacnhan']) {
-                $this->status = $this->signupDtb->insertCustomer($_COOKIE['id'], $_COOKIE['fu'], $_COOKIE['em'], $_COOKIE['pa'], $_COOKIE['ph'], $_COOKIE['ad']);
+                $md5pass = md5($_COOKIE['pa']);
+                $this->status = $this->signupDtb->insertCustomer($_COOKIE['id'], $_COOKIE['fu'], $_COOKIE['em'], $md5pass, $_COOKIE['ph'], $_COOKIE['ad']);
                 if ($this->status) {
+                    echo " 
+                    <script>
+                        alert('dang ki thanh cong')
+                    </script> ";
                     header("location: index.php?controller=signin");
                 } else {
                     echo "Đăng Ký Tài Khoản Thất Bại !!!";

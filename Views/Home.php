@@ -53,7 +53,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <!-- thanh navbar khi mobi -->
-            <a class="navbar-brand" href="index.html">Sunny Food</a>
+            <a class="navbar-brand" href="index.php">Sunny Food</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -221,14 +221,7 @@
                                         </div>
                                     </div>
                                     <p><span><?php echo $mo_ta[$key]; ?></span></p>
-                                    <p><a 
-                                        id="<?php echo $id_mon_an[$key];?>" 
-                                        data_name="<?php echo $mon_an[$key];?>" 
-                                        data_price="<?php echo $gia[$key];?>"
-                                        data_description="<?php echo $mo_ta[$key];?>" 
-                                        data_avatar="<?php echo $link_anh[$key];?>"
-                                        class="btn btn-primary addtocart"
-                                        >Thêm vào giỏ hàng</a></p>
+                                    <p><a id="<?php echo $id_mon_an[$key]; ?>" data_name="<?php echo $mon_an[$key]; ?>" data_price="<?php echo $gia[$key]; ?>" data_description="<?php echo $mo_ta[$key]; ?>" data_avatar="<?php echo $link_anh[$key]; ?>" class="btn btn-primary addtocart">Thêm vào giỏ hàng</a></p>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +248,7 @@
                             <div class="faded">
                                 <ul class="ftco-social d-flex">
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="ftco-animate"><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li class="ftco-animate"><a href="https://www.facebook.com/lequocbao241"><i class="fab fa-facebook"></i></a></li>
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
@@ -273,7 +266,7 @@
                             <div class="faded">
                                 <ul class="ftco-social d-flex">
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="ftco-animate"><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li class="ftco-animate"><a href="https://www.facebook.com/kiemsiwibu"><i class="fab fa-facebook"></i></a></li>
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
@@ -291,7 +284,7 @@
                             <div class="faded">
                                 <ul class="ftco-social d-flex">
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="ftco-animate"><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li class="ftco-animate"><a href="https://www.facebook.com/ngocnhat2k1"><i class="fab fa-facebook"></i></a></li>
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                                     <li class="ftco-animate"><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
@@ -307,9 +300,9 @@
             <div class="row d-flex">
                 <div class="col-md-7 ftco-animate makereservation p-4 px-md-5 pb-md-5 pt-6">
                     <div class="heading-section ftco-animate mb-5 text-center">
-                        <span class="subheading">Đặt Bàn</span>
+                        <span class="subheading" style="user-select: none;">Đặt Bàn</span>
                     </div>
-                    <form action="#">
+                    <form action="">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -430,15 +423,16 @@
 
     <script>
         $(document).ready(function() {
-            $(".signout").click(function () { 
+            $(".signout").click(function() {
                 document.cookie = "sf-useronlineid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 document.cookie = "sf-useronlinename=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 document.cookie = "sf-useronlinephone=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = "index.php";
             });
             $(".addtocart").click(function(e) {
                 let monAnTrongGioHang = {
-                    id: e.target.id, 
-                    soluong: 1, 
+                    id: e.target.id,
+                    soluong: 1,
                     name: $(this).attr('data_name'),
                     price: $(this).attr('data_price'),
                     description: $(this).attr('data_description'),

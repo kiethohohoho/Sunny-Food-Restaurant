@@ -9,8 +9,8 @@ body {
   background: linear-gradient(
     180deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(213, 211, 211, 0.6001751042213761) 100%
+    rgba(255, 255, 255, 1) 100%,
+    rgba(213, 211, 211, 0.6001751042213761) 0%
   );
   background-repeat: no-repeat;
   overflow: hidden;

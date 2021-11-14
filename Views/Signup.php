@@ -46,10 +46,6 @@
                                 <input type="text" class="form-control" placeholder="Số điện thoại" name="phonenumber" autocomplete="off" required>
                             </div>
                             <div class="form-group">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="far fa-address-card"></span></div>
-                                <input type="text" class="form-control" placeholder="Địa chỉ giao hàng" name="address" autocomplete="off" required>
-                            </div>
-                            <div class="form-group">
                                 <div class="w-100">
                                     <input type="checkbox" required>
                                     <label class="checkbox-wrap checkbox-primary">Tôi đồng ý tất cả các tuyên bố về điều khoản dịch vụ
@@ -89,8 +85,7 @@
                 },
                 cpassword: {
                     required: true,
-                    minlength: 5,
-                    equalTo: "#password"
+                    minlength: 5
                 },
                 phonenumber: {
                     required: true,
@@ -107,8 +102,7 @@
                 },
                 cpassword: {
                     required: "Xác nhận mật khẩu không được để trống",
-                    minlength: "Mật khẩu phải dài ít nhất 5 ký tự",
-                    equalTo: "Mật khẩu không trùng khớp"
+                    minlength: "Mật khẩu phải dài ít nhất 5 ký tự"
                 },
                 email: {
                     required: "Email không được để trống",

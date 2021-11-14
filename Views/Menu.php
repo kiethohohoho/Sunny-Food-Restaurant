@@ -36,7 +36,7 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <span class="text">
-                                <a href="#"">sunnyfoodvietnam@gmail.com</a>
+                                <a href="#">sunnyfoodvietnam@gmail.com</a>
                             </span>
                         </div>
                         <div class=" col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
@@ -55,7 +55,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <!-- thanh navbar khi mobi -->
-            <a class="navbar-brand" href="index.html">Sunny Food</a>
+            <a class="navbar-brand" href="index.php">Sunny Food</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -63,7 +63,7 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.php" class="nav-link">Trang Chủ</a></li>
-                    <li class="nav-item active"><a href="menu.html" class="nav-link">Menu</a></li>
+                    <li class="nav-item active"><a href="index.php?controller=menu" class="nav-link">Menu</a></li>
                     <li class="nav-item"><a href="index.php?controller=order" class="nav-link">Giỏ hàng</a></li>
                     <?php
                     if (!isset($_COOKIE['sf-useronlinename'])) {
@@ -72,15 +72,18 @@
                     }
                     ?>
                     <?php
-                    if (isset($_COOKIE['sf-useronlinename'])) {
+                    if (isset($_COOKIE['sf-useronlineid'])) {
                         echo '<li class="nav-item d-flex">
-                                    <div class="avatar-proflie-cover-div ">
+                                    <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
                                             <span class="fas fa-user-alt"></span>
-                                            <span>';echo $_COOKIE['sf-useronlinename'];echo '</span>
+                                            <span>';
+                        echo $_COOKIE['sf-useronlinename'];
+                        echo '</span>
                                         </a>
                                     </div>
-                                </li>';
+                                </li>
+                                <li class="nav-item cta"><a href="index.php" class="nav-link signout"> Đăng Xuất </a></li>';
                     }
                     ?>
                 </ul>
@@ -405,6 +408,12 @@
 
     <script>
         $(document).ready(function() {
+            $(".signout").click(function() {
+                document.cookie = "sf-useronlineid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "sf-useronlinename=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "sf-useronlinephone=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = "index.php";
+            });
             $(".addtocart").click(function(e) {
                 let monAnTrongGioHang = {
                     id: e.target.id, 

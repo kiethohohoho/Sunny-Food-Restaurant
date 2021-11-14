@@ -51,7 +51,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <!-- thanh navbar khi mobi -->
-            <a class="navbar-brand" href="index.html">Sunny Food</a>
+            <a class="navbar-brand" href="index.php">Sunny Food</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -70,7 +70,7 @@
                     <?php
                     if (isset($_COOKIE['sf-useronlineid'])) {
                         echo '<li class="nav-item d-flex">
-                                    <div class="avatar-proflie-cover-div ">
+                                    <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
                                             <span class="fas fa-user-alt"></span>
                                             <span>';
@@ -78,7 +78,8 @@
                         echo '</span>
                                         </a>
                                     </div>
-                                </li>';
+                                </li>
+                                <li class="nav-item cta"><a href="index.php" class="nav-link signout"> Đăng Xuất </a></li>';
                     }
                     ?>
                 </ul>
@@ -95,13 +96,13 @@
         <div class="container">
             <ul class="oder-link">
                 <li class="logo">
-                    <a href="./homePage.html">Sunny Food</a>
+                    <a href="index.php">Sunny Food</a>
                 </li>
                 <li class="oder-link-item">
-                    <a href="#">/ Gio Hang</a>
+                    <a href="index.php?controller=order">/ Gio Hang</a>
                 </li>
                 <li class="oder-link-item">
-                    <a href="#">/Dat Hang</a>
+                    <a href="">/Dat Hang</a>
                 </li>
             </ul>
             <h2 class="font-bold">Đặt hàng</h2>
@@ -243,6 +244,17 @@
                 </div>
             </div>
     </footer>
+
+    <script>
+        $(document).ready(function () {
+            $(".signout").click(function() {
+                document.cookie = "sf-useronlineid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "sf-useronlinename=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "sf-useronlinephone=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = "index.php";
+            });
+        });
+    </script>
 </body>
 
 </html>

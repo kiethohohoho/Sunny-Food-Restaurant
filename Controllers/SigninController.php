@@ -16,7 +16,7 @@ class SigninController extends BaseController
     {
         if (isset($_POST['signinsubmit'])) {
             $email = $_POST['email'];
-            $mk = $_POST['password'];
+            $mk = md5($_POST['password']);
             $user = $this->signinDtb->findUser($email);
             $user_arr = $user->fetch_row();
             $pass = $user_arr[3];
