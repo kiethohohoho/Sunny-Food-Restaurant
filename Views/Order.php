@@ -126,7 +126,7 @@
                         </div>
                         <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
                             <div class="font-bold text-sm">Voucher:</div>
-                            <div class="text-base">0&nbsp;₫</div>
+                            <div class="text-base">0&nbsp;%</div>
                         </div>
                         <div class="d-flex justify-between items-center px-0 border-b border-gray-100 pb-4">
                             <div class="font-bold text-sm">Thành tiền:</div>
@@ -197,7 +197,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script>
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
         let giohang = JSON.parse(localStorage.getItem("sf-giohang"));
+        setCookie('sl', giohang.length, 3600);
         if (giohang) {
             document.querySelector(".font-bold").innerHTML = `Giỏ hàng ● ${giohang.length} món`;
             let html = giohang.map(val =>
@@ -328,18 +335,28 @@
             }
             let thanhtien = tamtinh + phiship - voucher * tamtinh / 100;
 
-            document.getElementById('tam-tinh').innerHTML = Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            }).format(tamtinh);
-            document.getElementById('phi-ship').innerHTML = Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            }).format(phiship);
-            document.getElementById('thanh-tien').innerHTML = Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            }).format(thanhtien);
+            function formatMoney(params) {
+                return Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(params);
+            }
+
+            document.getElementById('tam-tinh').innerHTML = formatMoney(tamtinh);
+            document.getElementById('phi-ship').innerHTML = formatMoney(phiship);
+            document.getElementById('thanh-tien').innerHTML = formatMoney(thanhtien);
+
+            function setCookie(cname, cvalue, exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays * 1000));
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+            //Xử lý đặt hàng
+            setCookie(`ttn`, formatMoney(tamtinh), 3600);
+            setCookie(`ps`, formatMoney(phiship), 3600);
+            setCookie(`vc`, voucher, 3600);
+            setCookie(`tti`, formatMoney(thanhtien), 3600);
         });
     </script>
     <script>
@@ -355,9 +372,9 @@
                 let localGiohang = JSON.parse(localStorage.getItem('sf-giohang'));
                 let i = 1;
                 localGiohang.map(val => {
-                    setCookie(`id${i}`, val.id, 10);
-                    setCookie(`price${i}`, val.price, 10);
-                    setCookie(`soluong${i}`, val.soluong, 10);
+                    setCookie(`id${i}`, val.id, 86400);
+                    setCookie(`price${i}`, val.price, 86400);
+                    setCookie(`zzzsoluong${i}`, val.soluong, 86400);
                     i++;
                 })
             });

@@ -109,50 +109,56 @@
                 <div class="col-lg-9 border-gray">
                     <div class="list-cart ">
                         <div class="p-2 border-b last-border-b-0">
-                            <div class="form-defaut">
-                                <div class="title-form font-bold">
-                                    <span>Thông tin người nhận</span>
+                            <form action="index.php?controller=pay&action=handle" method="POST">
+                                <div class="form-defaut">
+                                    <div class="title-form font-bold">
+                                        <span>Thông tin người nhận</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="col-md-6 form-group">
+                                            <div class="input-wrap ">
+                                                <input type="text" name="hovaten" placeholder="Họ và Tên" class="form-control" required value="<?php if (isset($_COOKIE['sf-useronlinename'])) {echo $_COOKIE['sf-useronlinename'];}?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <div class="input-wrap">
+                                                <input type="text" name="sdt" placeholder="Số điện thoại" class="form-control" required value="<?php if (isset($_COOKIE['sf-useronlinephone'])) {echo $_COOKIE['sf-useronlinephone'];} ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="title-form font-bold">
+                                        <span>Địa chỉ nhận hàng</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="col-md-4 form-group">
+                                            <div class="input-wrap ">
+                                                <input type="text" name="ttp" placeholder="Tỉnh/ Thành Phố" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <div class="input-wrap">
+                                                <input type="text" name="qh" placeholder="Quận/ Huyện" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <div class="input-wrap">
+                                                <input type="text" name="xp" placeholder="Xã/ Phường" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="col-md-12 form-group">
+                                            <div class="input-wrap">
+                                                <input type="text" name="da" placeholder="Số nhà, tên đường,.." class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-flex">
-                                    <div class="col-md-6 form-group">
-                                        <div class="input-wrap ">
-                                            <input type="text" placeholder="Họ và Tên" class="form-control" value="<?php if(isset($_COOKIE['sf-useronlinename'])){echo $_COOKIE['sf-useronlinename'];}?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <div class="input-wrap">
-                                            <input type="text" placeholder="Số điện thoại" class="form-control" value="<?php if(isset($_COOKIE['sf-useronlinephone'])){echo $_COOKIE['sf-useronlinephone'];}?>" required>
-                                        </div>
-                                    </div>
+                                <div class="py-3 col-md-4">
+                                    <input type="submit" class="btn-color" value="Đặt hàng"/>
+                                </button>
                                 </div>
-                                <div class="title-form font-bold">
-                                    <span>Địa chỉ nhận hàng</span>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-md-4 form-group">
-                                        <div class="input-wrap ">
-                                            <input type="text" placeholder="Tỉnh/ Thành Phố" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <div class="input-wrap">
-                                            <input type="text" placeholder="Quận/ Huyện" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <div class="input-wrap">
-                                            <input type="text" placeholder="Xã/ Phường" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="col-md-12 form-group">
-                                        <div class="input-wrap">
-                                            <input type="text" placeholder="Số nhà,tên đường, phường, xã,.." class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,27 +166,29 @@
                     <div class="checkout_sidebar py-4 space-y-4 ">
 
                         <div class="d-flex justify-between px-0 md:px-4 border- pb-4">
-                            <div class="font-bold text-sm">Đơn hàng(3sp)</div>
-                            <a href="oder.html" class="text-base font-bold">Sửa</a>
+                            <div class="font-bold text-sm">Đơn hàng(<?php echo $_COOKIE['sl'] ?>sp)</div>
+                            <a href="index.php?controller=order" class="text-base font-bold">Sửa</a>
                         </div>
 
-                        <div class="d-flex justify-between px-0 md:px-4 border- pb-4">
+                        <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
                             <div class="font-bold text-sm">Tạm tính:</div>
-                            <div class="text-base">600.000&nbsp;₫</div>
+                            <div class="text-base" id="tam-tinh"><?php echo $_COOKIE['ttn'] ?></div>
                         </div>
-                        <div class="d-flex justify-between items-center px-0 md:px-4 border-b border-gray-100 pb-4">
+                        <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
+                            <div class="font-bold text-sm">Phí ship:</div>
+                            <div class="text-base" id="phi-ship"><?php echo $_COOKIE['ps'] ?></div>
+                        </div>
+                        <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
+                            <div class="font-bold text-sm">Voucher:</div>
+                            <div class="text-base"><?php echo $_COOKIE['vc'] . " %" ?></div>
+                        </div>
+                        <div class="d-flex justify-between items-center px-0 border-b border-gray-100 pb-4">
                             <div class="font-bold text-sm">Thành tiền:</div>
-                            <div class="text-lg text-red-400 font-bold">
-                                600.000&nbsp;₫
-                            </div>
+                            <div class="text-lg text-red-400 font-bold" id="thanh-tien"><?php echo $_COOKIE['tti'] ?></div>
                         </div>
-
                     </div>
                 </div>
 
-            </div>
-            <div class="py-3 col-md-4">
-                <a href="index.php?controller=pay&action=handle" class="btn-color"> Đặt hàng</a>
             </div>
     </section>
 
