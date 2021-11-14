@@ -52,22 +52,25 @@ class PayController extends BaseController
             $this->payDtb->insertDetailOrder($_COOKIE["id$i"], $_COOKIE["zzzsoluong$i"], $_COOKIE["price$i"], $iddonhang);
         }
 
+        $sf_id = $_COOKIE['sf-useronlineid'];
+        $sf_name = $_COOKIE['sf-useronlinename'];
+        $sf_phone = $_COOKIE['sf-useronlinephone'];
+
         if (isset($_SERVER['HTTP_COOKIE'])) {
             $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-            foreach($cookies as $cookie) {
+            foreach ($cookies as $cookie) {
                 $parts = explode('=', $cookie);
                 $name = trim($parts[0]);
-                setcookie($name, '', time()-1000);
-                setcookie($name, '', time()-1000, '/');
+                setcookie($name, '', time() - 1000);
+                setcookie($name, '', time() - 1000, '/');
             }
         }
 
-        echo
-        "<script>
-            localStorage.setItem('sf-giohang', JSON.stringify(''));
-        </script>";
+        setcookie('sf-useronlineid', $sf_id, time() + 86400 * 7, "/");
+        setcookie('sf-useronlinename', $sf_name, time() + 86400 * 7, "/");
+        setcookie('sf-useronlinephone', $sf_phone, time() + 86400 * 7, "/");
 
-        // header("location: index.php?controller=pay");
-        // header("location: index.php?controller=allorder");
+
+        header("location: index.php?controller=history");
     }
 }

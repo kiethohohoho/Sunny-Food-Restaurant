@@ -69,4 +69,11 @@ class DBconfig
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function selectAllOrderById($id)
+    {
+        $sql = "SELECT * FROM `don_hang` WHERE `id_khach_hang` = '$id'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
 }

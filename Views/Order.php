@@ -77,7 +77,8 @@
                     ?>
                     <?php
                     if (isset($_COOKIE['sf-useronlineid'])) {
-                        echo '<li class="nav-item d-flex">
+                        echo '<li class="nav-item"><a href="index.php?controller=history" class="nav-link">Lịch sử đơn hàng</a></li>
+                        <li class="nav-item d-flex">
                                     <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
                                             <span class="fas fa-user-alt"></span>
@@ -123,7 +124,7 @@
                         </div>
                         <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
                             <div class="font-bold text-sm">Phí ship:</div>
-                            <div class="text-base" id="phi-ship">0&nbsp;₫</div>
+                            <div class="text-base" id="phi-ship"></div>
                         </div>
                         <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
                             <div class="font-bold text-sm">Voucher:</div>
@@ -131,10 +132,10 @@
                         </div>
                         <div class="d-flex justify-between items-center px-0 border-b border-gray-100 pb-4">
                             <div class="font-bold text-sm">Thành tiền:</div>
-                            <div class="text-lg text-red-400 font-bold" id="thanh-tien">600.000&nbsp;₫ </div>
+                            <div class="text-lg text-red-400 font-bold" id="thanh-tien"></div>
                         </div>
                         <div class="py-3">
-                            <a href="index.php?controller=pay" class="btn-color"> Tiến hành đặt hàng</a>
+                            <a href="index.php?controller=pay" onclick="handle()" class="btn-color"> Tiến hành đặt hàng</a>
                         </div>
                     </div>
                 </div>
@@ -275,12 +276,13 @@
             let thanhtien = 0;
 
             function UpdateColRight() {
+                tamtinh = 0;
                 let array_all_price = document.getElementsByClassName("price");
                 let array_all_count = document.getElementsByClassName("sl");
 
                 for (let i = 0; i < array_all_price.length; i++) {
-                    let a = array_all_price[i].textContent.slice(0, -2).replaceAll('.', '');
-                    let b = array_all_count[i].textContent.slice(10);
+                    let a = array_all_price[i].textContent.slice(0, -2).replaceAll('.', '')*1;
+                    let b = array_all_count[i].textContent.slice(10)*1;
                     tamtinh += a * b;
                 }
                 thanhtien = tamtinh + phiship - voucher * tamtinh / 100;

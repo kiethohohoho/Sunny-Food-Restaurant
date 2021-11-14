@@ -66,14 +66,15 @@
                     <li class="nav-item active"><a href="index.php?controller=menu" class="nav-link">Menu</a></li>
                     <li class="nav-item"><a href="index.php?controller=order" class="nav-link">Giỏ hàng</a></li>
                     <?php
-                    if (!isset($_COOKIE['sf-useronlinename'])) {
+                    if (!isset($_COOKIE['sf-useronlineid'])) {
                         echo '<li class="nav-item cta"><a href="index.php?controller=signin" class="nav-link" style="margin-right: 10px;"> Đăng Nhập </a></li>
                                 <li class="nav-item cta"><a href="index.php?controller=signup" class="nav-link"> Đăng Ký </a></li>';
                     }
                     ?>
                     <?php
                     if (isset($_COOKIE['sf-useronlineid'])) {
-                        echo '<li class="nav-item d-flex">
+                        echo '<li class="nav-item"><a href="index.php?controller=history" class="nav-link">Lịch sử đơn hàng</a></li>
+                        <li class="nav-item d-flex">
                                     <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
                                             <span class="fas fa-user-alt"></span>

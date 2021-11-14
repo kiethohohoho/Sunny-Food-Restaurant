@@ -71,7 +71,8 @@
                     ?>
                     <?php
                     if (isset($_COOKIE['sf-useronlineid'])) {
-                        echo '<li class="nav-item d-flex">
+                        echo '<li class="nav-item"><a href="index.php?controller=history" class="nav-link">Lịch sử đơn hàng</a></li>
+                        <li class="nav-item d-flex">
                                     <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
                                             <span class="fas fa-user-alt"></span>

@@ -60,7 +60,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.php" class="nav-link">Trang Chủ</a></li>
                     <li class="nav-item"><a href="index.php?controller=menu" class="nav-link">Menu</a></li>
-                    <li class="nav-item active"><a href="index.php?controller=order" class="nav-link">Giỏ hàng</a></li>
+                    <li class="nav-item"><a href="index.php?controller=order" class="nav-link">Giỏ hàng</a></li>
                     <?php
                     if (!isset($_COOKIE['sf-useronlineid'])) {
                         echo '<li class="nav-item cta"><a href="index.php?controller=signin" class="nav-link" style="margin-right: 10px;"> Đăng Nhập </a></li>
@@ -69,7 +69,7 @@
                     ?>
                     <?php
                     if (isset($_COOKIE['sf-useronlineid'])) {
-                        echo '<li class="nav-item"><a href="index.php?controller=history" class="nav-link">Lịch sử đơn hàng</a></li>
+                        echo '<li class="nav-item active"><a href="index.php?controller=history" class="nav-link">Lịch sử đơn hàng</a></li>
                         <li class="nav-item d-flex">
                                     <div class="nav-link avatar-proflie-cover-div ">
                                         <a href="" class="avatar-profile-cover">
@@ -83,15 +83,13 @@
                                 <li class="nav-item cta"><a href="index.php" class="nav-link signout"> Đăng Xuất </a></li>';
                     }
                     ?>
+                    <!-- <li class="nav-item cta"><a href="index.php?controller=signin" class="nav-link" style="margin-left: 10px;"> Đăng Xuất </a></li> -->
                 </ul>
             </div>
         </div>
     </nav>
     <section class="hero-wrap" style="background-image:url(Public/images/imagesMenu/xbg_3.jpg.pagespeed.ic.RHn8WPcUap.webp); height: 115px;" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
-
-        </div>
-        </div>
     </section>
     <section class="oder py-3 pb-5">
         <div class="container">
@@ -99,103 +97,37 @@
                 <li class="logo">
                     <a href="index.php">Sunny Food</a>
                 </li>
-                <li class="oder-link-item">
-                    <a href="index.php?controller=order">/ Gio Hang</a>
-                </li>
-                <li class="oder-link-item">
-                    <a href="">/Dat Hang</a>
+                <li class="oder-link-item ">
+                    <a href="#">/ Lich Su</a>
                 </li>
             </ul>
-            <h2 class="font-bold">Đặt hàng</h2>
+            <h2 class="font-bold">Danh sách đơn hàng</h2>
             <div class="d-md-flex  d-flex-wrap font-primary mb-8 md:mb-14">
-                <div class="col-lg-9 border-gray">
-                    <div class="list-cart ">
-                        <div class="p-2 border-b last-border-b-0">
-                            <form action="index.php?controller=pay&action=handle" method="POST">
-                                <div class="form-defaut">
-                                    <div class="title-form font-bold">
-                                        <span>Thông tin người nhận</span>
+                <div class="col-lg-12 border-gray">
+                    <?php foreach ($id_don_hang as $key => $value) : ?>
+                        <div class="list-cart ">
+                            <div class="p-2 border-b last-border-b-0">
+                                <div>
+                                    <div class="d-flex justify-between">
+                                        <h3 class="text-base md-text-xl font-bold">
+                                            <a href="" class="food-name"><?php echo $ngay_dat_hang[$key]; ?></a>
+                                        </h3>
                                     </div>
-                                    <div class="d-flex">
-                                        <div class="col-md-6 form-group">
-                                            <div class="input-wrap ">
-                                                <input type="text" name="hovaten" placeholder="Họ và Tên" class="form-control" required value="<?php if (isset($_COOKIE['sf-useronlinename'])) {
-                                                                                                                                                    echo $_COOKIE['sf-useronlinename'];
-                                                                                                                                                } ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <div class="input-wrap">
-                                                <input type="text" name="sdt" placeholder="Số điện thoại" class="form-control" required value="<?php if (isset($_COOKIE['sf-useronlinephone'])) {
-                                                                                                                                                    echo $_COOKIE['sf-useronlinephone'];
-                                                                                                                                                } ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="title-form font-bold">
-                                        <span>Địa chỉ nhận hàng</span>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="col-md-4 form-group">
-                                            <div class="input-wrap ">
-                                                <input type="text" name="ttp" placeholder="Tỉnh/ Thành Phố" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <div class="input-wrap">
-                                                <input type="text" name="qh" placeholder="Quận/ Huyện" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <div class="input-wrap">
-                                                <input type="text" name="xp" placeholder="Xã/ Phường" class="form-control" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="col-md-12 form-group">
-                                            <div class="input-wrap">
-                                                <input type="text" name="da" placeholder="Số nhà, tên đường,.." class="form-control" required>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                    <?php foreach ($so_luong as $key2 => $value) : ?>
+                                        <ul class="d-flex justify-content-center justify-between">
+                                            <li class="col-lg-4"><?php echo $id_mon_an[$key2]; ?></li>
+                                            <li class="col-lg-4"><?php echo $so_luong[$key2]; ?></li>
+                                            <li class="col-lg-4"><?php echo $giatien[$key2]; ?></li>
+                                        </ul>
+                                    <?php endforeach; ?>
                                 </div>
-                                <div class="py-3 col-md-4">
-                                    <input type="submit" class="btn-color" value="Đặt hàng" />
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="col-lg-3 border-gray border-left-none ">
-                    <div class="checkout_sidebar py-4 space-y-4 ">
-
-                        <div class="d-flex justify-between px-0 md:px-4 border- pb-4">
-                            <div class="font-bold text-sm">Đơn hàng(<?php echo $_COOKIE['sl'] ?>sp)</div>
-                            <a href="index.php?controller=order" class="text-base font-bold">Sửa</a>
-                        </div>
-
-                        <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
-                            <div class="font-bold text-sm">Tạm tính:</div>
-                            <div class="text-base" id="tam-tinh"><?php echo $_COOKIE['ttn'] ?></div>
-                        </div>
-                        <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
-                            <div class="font-bold text-sm">Phí ship:</div>
-                            <div class="text-base" id="phi-ship"><?php echo $_COOKIE['ps'] ?></div>
-                        </div>
-                        <div class="d-flex justify-between align-items-center px-0 border- pb-4" style="gap: 10px;">
-                            <div class="font-bold text-sm">Voucher:</div>
-                            <div class="text-base"><?php echo $_COOKIE['vc'] . " %" ?></div>
-                        </div>
-                        <div class="d-flex justify-between items-center px-0 border-b border-gray-100 pb-4">
-                            <div class="font-bold text-sm">Thành tiền:</div>
-                            <div class="text-lg text-red-400 font-bold" id="thanh-tien"><?php echo $_COOKIE['tti'] ?></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+        </div>
     </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -249,20 +181,7 @@
                 </div>
             </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $('.btn-color').click(function(e) {
-                localStorage.setItem('sf-giohang', JSON.stringify(''));
-            });
-            $(".signout").click(function() {
-                document.cookie = "sf-useronlineid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                document.cookie = "sf-useronlinename=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                document.cookie = "sf-useronlinephone=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                window.location.href = "index.php";
-            });
-        });
-    </script>
+
 </body>
 
 </html>
